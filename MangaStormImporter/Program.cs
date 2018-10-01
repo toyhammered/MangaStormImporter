@@ -6,7 +6,8 @@ namespace MangaStormImporter
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var import = new Import();
+            import.Proccess();
         }
     }
 }
