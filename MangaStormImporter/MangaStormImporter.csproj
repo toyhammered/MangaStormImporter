@@ -9,4 +9,10 @@
     <Folder Include="Contracts\" />
     <Folder Include="Libs\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DotNetEnv" Version="1.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".env.example" />
+  </ItemGroup>
 </Project>
