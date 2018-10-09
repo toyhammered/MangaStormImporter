@@ -5,4 +5,25 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Contracts\" />
+    <Folder Include="Libs\" />
+    <Folder Include="Services\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Contracts\KitsuService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DotNetEnv" Version="1.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Algolia.Search" Version="5.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".env.example" />
+  </ItemGroup>
 </Project>
