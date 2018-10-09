@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using MangaStormImporter.Contracts;
 
 namespace MangaStormImporter.Libs
 {
-    public class FileHelper
+    public class FileHelper : IFileHelper
     {
 
         public StreamReader FileContent;
 
         // Constants
         private const string FILE_NAME = "history.dat";
+        private const string UPDATED_FILE_NAME = "updated_history.dat";
 
         public FileHelper()
         {
@@ -32,6 +34,20 @@ namespace MangaStormImporter.Libs
             return formatted;
         }
 
+        public async Task WriteErrors(List<MangaStormResponse> errors)
+        {
+            StreamWriter file = new StreamWriter(UPDATED_FILE_NAME, false);
+            string formatted;
+
+            foreach (var manga in errors)
+            {
+                formatted = FormattedEntry(manga);
+                await file.WriteAsync(formatted);
+            }
+
+            file.Close();
+        }
+
         private MangaStormResponse FormattedEntry(string[] data)
         {
             return new MangaStormResponse
@@ -39,8 +55,26 @@ namespace MangaStormImporter.Libs
                 Source = data[0],
                 Title = data[1],
                 Chapter = FormatChapter(data[2]),
+                Unused1 = data[3],
+                Unused2 = data[4],
+                Unused3 = data[5],
                 Site = data[6]
             };
+        }
+
+        private string FormattedEntry(MangaStormResponse data)
+        {
+            string formatted = "";
+
+            formatted += data.Source + "\t";
+            formatted += data.Title + "\t";
+            formatted += data.Chapter + "\t";
+            formatted += data.Unused1 + "\t";
+            formatted += data.Unused2 + "\t";
+            formatted += data.Unused3 + "\t";
+            formatted += data.Site + "\n";
+
+            return formatted;
         }
 
         private int FormatChapter(string chapter)
